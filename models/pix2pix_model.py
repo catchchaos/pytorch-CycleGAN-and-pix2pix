@@ -86,12 +86,12 @@ class Pix2PixModel(BaseModel):
     def forward(self):
         """Run forward pass; called by both functions <optimize_parameters> and <test>."""
 #         self.fake_B = self.netG(self.real_A)  # G(A)
-        samples = [self.netG(self.real_A) for i in range(1)]
+        samples = [self.netG(self.real_A) for i in range(10)]
         self.fake_B = torch.mean(samples)
-        var = torach.var(samples).permute(0,2,3,1).cpu().numpy().squeeze()
+        var = torcch.var(samples).permute(0,2,3,1).cpu().numpy().squeeze()
         import cv2
         cv2.imwrite('var.exr', var)
-
+        
     def backward_D(self):
         """Calculate GAN loss for the discriminator"""
         # Fake; stop backprop to the generator by detaching fake_B
