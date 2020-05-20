@@ -56,6 +56,9 @@ def save_image(image_numpy, image_path, aspect_ratio=1.0, exr=False):
     """
 
     if exr:
+        print(image_path)
+        print(image_numpy.shape)
+        print(image_numpy)
         cv2.imwrite(image_path[:-3] + 'exr', image_numpy[:,:,::-1])
     image_pil = Image.fromarray(image_numpy)
     h, w, _ = image_numpy.shape
