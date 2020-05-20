@@ -3,6 +3,7 @@ from __future__ import print_function
 import torch
 import numpy as np
 from PIL import Image
+import cv2
 import os
 
 
@@ -46,7 +47,7 @@ def diagnose_network(net, name='network'):
     print(mean)
 
 
-def save_image(image_numpy, image_path, aspect_ratio=1.0):
+def save_image(image_numpy, image_path, aspect_ratio=1.0, exr=False):
     """Save a numpy image to the disk
 
     Parameters:
@@ -54,6 +55,8 @@ def save_image(image_numpy, image_path, aspect_ratio=1.0):
         image_path (str)          -- the path of the image
     """
 
+    if exr:
+        cv2.imwrite(image_path[:-3] + 'exr', image_numpy[:,:,::-1])
     image_pil = Image.fromarray(image_numpy)
     h, w, _ = image_numpy.shape
 
