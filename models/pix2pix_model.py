@@ -86,7 +86,7 @@ class Pix2PixModel(BaseModel):
     def forward(self):
         """Run forward pass; called by both functions <optimize_parameters> and <test>."""
 #         self.fake_B = self.netG(self.real_A)  # G(A)
-        samples = torch.stack([self.netG(self.real_A) for i in range(100)])
+        samples = torch.stack([self.netG(self.real_A) for i in range(1000)])
         self.fake_B = torch.mean(samples, axis=0)
         var = torch.var(samples, axis=0).permute(0,2,3,1).cpu().numpy().squeeze()
         import cv2
